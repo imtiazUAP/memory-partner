@@ -1,0 +1,15 @@
+{
+  "name": "memory-partner",
+  "version": "1.0.0",
+  "description": "Dockerized environment with a database, a back-end and a front-end application for memory-partner.",
+  "scripts": {
+    "build:back": "docker-compose build server",
+    "build:front": "docker-compose build client",
+    "start:db": "docker-compose up memoryPartnerDb",
+    "start:back": "docker-compose up server --renew-anon-volumes",
+    "start:front": "docker-compose up client --renew-anon-volumes",
+    "clean": "docker-compose down -v"
+  },
+  "author": "Imtiaz Ahmed",
+  "license": "ISC"
+}
