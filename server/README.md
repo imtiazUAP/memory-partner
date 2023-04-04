@@ -71,3 +71,33 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## To generate migration script
+
+Go to /server directory,
+Create entity enside entities folder,
+Include the entity in ormConfig.js entities array
+Run the following command in terminal (inside /server directory)
+```bash
+$ npm run typeorm:generate-migration --name=MIGRATION_FILE_NAME
+```
+Note: Replace MIGRATION_FILE_NAME with your desired name
+
+About passing the filename from command line to package.json:
+In the package.json the name should replace with:
+Linux/Mac: $npm_config_name or ${npm_config_name}
+Windows: %npm_config_name%
+Otherwise the argument won't print
+.
+The migration script should generate without issue!
+
+## To run generated migration script
+
+Import the generated migration script inside ormConfig.ts,
+Copy the classname from the generation script's classname,
+Include in migrations array
+Run following command:
+```bash
+$ npm run typeorm:run-migrations
+```
+The migration should run without issue
