@@ -4,20 +4,20 @@ import React, { useEffect, useState } from 'react';
 export default function SideBar() {
   const [memories, setMemories] = useState([]);
 
-  useEffect(() => {
-    if (!memories.length) {
-      try {
-        fetch('http://localhost:3000/memories/list', {
-          method: 'GET',
-        }).then(async (response: any) => {
-          const memories = await response.json();
-          setMemories(memories);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }, [memories]);
+  // useEffect(() => {
+  //   if (!memories.length) {
+  //     try {
+  //       fetch('http://localhost:3001/memories/list', {
+  //         method: 'GET',
+  //       }).then(async (response: any) => {
+  //         const memories = await response.json();
+  //         setMemories(memories);
+  //       });
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  // }, [memories]);
 
   return (
     <>

@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { MemoriesModule } from './memories/memories.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { AppService } from './app.service';
         entities: [],
         synchronize: false,
       }),
-    })
+    }),
+    MemoriesModule
   ],
   controllers: [AppController],
   providers: [AppService],
