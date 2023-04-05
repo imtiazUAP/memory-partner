@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MemoriesModule } from './memories/memories.module';
+import { Memories } from '../entities/memories.entity';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { MemoriesModule } from './memories/memories.module';
         username: configService.get('DB_USER'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: [],
+        entities: [Memories],
         synchronize: false,
       }),
     }),
