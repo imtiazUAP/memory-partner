@@ -29,7 +29,6 @@ const Memory: NextPage = (): JSX.Element => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ id: id, description: memoryDescription }),
-      // body: JSON.stringify({}),
     });
   };
 
