@@ -15,20 +15,14 @@ const Memory: NextPage = (): JSX.Element => {
   const router = useRouter();
   const { id } = router.query;
 
-  const handleChange = (newValue: EditorState) => {
-    const contentState = newValue.getCurrentContent();
-    const rawContentState = JSON.stringify(convertToRaw(contentState));
-    setMemoryDescription(rawContentState);
-  };
-
-  const handleSave = () => {
+  const handleSave = (editedDescription:any) => {
     fetch(`http://localhost:3001/memories/${id}`, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ id: id, description: memoryDescription }),
+      body: JSON.stringify({ id: id, description: editedDescription }),
     });
   };
 
@@ -59,7 +53,6 @@ const Memory: NextPage = (): JSX.Element => {
               label="Type something here..."
               value={memoryDescription}
               inlineToolbar={true}
-              onChange={(newValue: EditorState) => handleChange(newValue)}
               onSave={handleSave}
             />
           </ThemeProvider>

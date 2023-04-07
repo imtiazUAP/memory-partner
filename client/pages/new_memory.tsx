@@ -1,24 +1,11 @@
 import { NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import Button from '@mui/material/Button';
-import { EditorState, convertToRaw } from 'draft-js';
+import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MUIRichTextEditor from 'mui-rte';
 
 const Memory: NextPage = (): JSX.Element => {
-  const emptyContentState = JSON.stringify(
-    convertToRaw(EditorState.createEmpty().getCurrentContent()),
-  );
-  const [memoryDescription, setMemoryDescription] = useState(emptyContentState);
 
-  const handleChange = (newValue: EditorState) => {
-    const contentState = newValue.getCurrentContent();
-    const rawContentState = JSON.stringify(convertToRaw(contentState));
-    setMemoryDescription(rawContentState);
-  };
-
-  const handleSave = () => {
+  const handleSave = (newValue: any) => {
     fetch(`http://localhost:3001/memories/add`, {
       method: 'POST',
       headers: {
@@ -28,7 +15,7 @@ const Memory: NextPage = (): JSX.Element => {
       body: JSON.stringify({
         user_id: 1,
         title: 'This is title',
-        description: memoryDescription,
+        description: newValue,
         updated_by: 1,
       }),
     });
@@ -44,9 +31,7 @@ const Memory: NextPage = (): JSX.Element => {
         <ThemeProvider theme={myTheme}>
           <MUIRichTextEditor
             label="Type something here..."
-            value={memoryDescription}
             inlineToolbar={true}
-            onChange={(newValue: EditorState) => handleChange(newValue)}
             onSave={handleSave}
           />
         </ThemeProvider>
