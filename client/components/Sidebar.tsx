@@ -27,7 +27,6 @@ export default function SideBar() {
         </Link>
         {memories.map((memory) => {
           let parsedDescription = JSON.parse(memory.description);
-          // console.log('--- parsedDescription', parsedDescription);
           if (!parsedDescription.blocks) {
             parsedDescription = JSON.parse(parsedDescription);
           }
