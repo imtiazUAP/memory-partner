@@ -33,7 +33,6 @@ export class MemoriesService {
   }
 
   async getMemoryDetail(memoryId: number): Promise<any> {
-    console.log('----- getting memory detail -----');
     return await this.memoryRepository.findOneBy({ id: memoryId });
   }
 

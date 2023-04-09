@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import { EditorState, convertToRaw } from 'draft-js';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MUIRichTextEditor from 'mui-rte';
+import Head from 'next/head';
 
 const Memory: NextPage = (): JSX.Element => {
   const emptyContentState = JSON.stringify(
@@ -46,6 +47,10 @@ const Memory: NextPage = (): JSX.Element => {
 
   return (
     <div className="content">
+      <Head>
+        <title>Memory</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       {memoryId && (
         <div>
           <ThemeProvider theme={myTheme}>
