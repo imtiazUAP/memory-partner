@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  transpilePackages: ['@mui/material/styles', 'mui-rte'],
   webpack: config => {
     config.watchOptions = {
       poll: 1000,

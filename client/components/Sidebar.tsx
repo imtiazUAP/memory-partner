@@ -2,12 +2,12 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 export default function SideBar() {
-  const [memories, setMemories] = useState([]);
+  const [memories, setMemories] = useState([] as any[]);
 
   useEffect(() => {
     if (!memories.length) {
       try {
-        fetch('http://localhost:3000/memories/list', {
+        fetch('http://localhost:3001/memories/list', {
           method: 'GET',
         }).then(async (response: any) => {
           const memories = await response.json();
@@ -26,17 +26,16 @@ export default function SideBar() {
           Add new memory
         </Link>
         {memories.map((memory) => {
-          // let parsedDescription = JSON.parse(memory.description);
-          // // console.log('--- parsedDescription', parsedDescription);
-          // if (!parsedDescription.blocks) {
-          //   parsedDescription = JSON.parse(parsedDescription);
-          // }
-          // return (
-          //   <Link key={memory.id} href={`/memory?id=${memory.id}`}>
-          //     {parsedDescription.blocks[0].text.substring(0, 20)}
-          //   </Link>
-          // );
-          return <></>
+          let parsedDescription = JSON.parse(memory.description);
+          // console.log('--- parsedDescription', parsedDescription);
+          if (!parsedDescription.blocks) {
+            parsedDescription = JSON.parse(parsedDescription);
+          }
+          return (
+            <Link key={memory.id} href={`/memory?id=${memory.id}`}>
+              {parsedDescription.blocks[0].text.substring(0, 20)}
+            </Link>
+          );
         })}
       </div>
     </>
