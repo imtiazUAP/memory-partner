@@ -46,8 +46,7 @@ const Memory: NextPage = (): JSX.Element => {
   }
 
   return (
-    // <div className="content">
-    <div>
+    <div className="content">
       <Head>
         <title>Memory</title>
         <link rel="icon" href="/favicon.ico" />

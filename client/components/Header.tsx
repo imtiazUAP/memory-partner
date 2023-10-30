@@ -1,10 +1,8 @@
 import type { NextPage } from 'next';
 import React from 'react';
-import Link from 'next/link';
 import AppBar from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 const Header: NextPage = () => {
@@ -17,9 +15,6 @@ const Header: NextPage = () => {
 
   return (
     <div className="layout-header">
-      {/* <Link key={1} href="/">
-        Memory Partner
-      </Link> */}
           <AppBar
       position="fixed"
       sx={{
@@ -27,7 +22,7 @@ const Header: NextPage = () => {
         ml: { sm: `${drawerWidth}px` },
       }}
     >
-      <Toolbar>
+      <div>
         <IconButton
           color="inherit"
           aria-label="open drawer"
@@ -40,7 +35,7 @@ const Header: NextPage = () => {
         <Typography variant="h6" noWrap component="div">
           Memory Partner
         </Typography>
-      </Toolbar>
+      </div>
     </AppBar>
     </div>
   );
