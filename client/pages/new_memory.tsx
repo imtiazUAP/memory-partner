@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MUIRichTextEditor from 'mui-rte';
+import Head from 'next/head';
 
 const Memory: NextPage = (): JSX.Element => {
 
@@ -27,6 +28,10 @@ const Memory: NextPage = (): JSX.Element => {
 
   return (
     <div className="content">
+      <Head>
+        <title>New memory</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div>
         <ThemeProvider theme={myTheme}>
           <MUIRichTextEditor
