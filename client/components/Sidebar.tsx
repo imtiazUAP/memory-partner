@@ -10,6 +10,9 @@ import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 import Toolbar from '@mui/material/Toolbar';
 import { useRouter } from 'next/router';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Typography from '@mui/material/Typography';
 
 export default function SideBar(props: any) {
   const [memories, setMemories] = useState([] as any[]);
@@ -40,11 +43,22 @@ export default function SideBar(props: any) {
     router.push(`/memory?id=${id}`);
   };
 
-  const container = window !== undefined ? () => window().document.body : undefined;
-
   const drawer = (
     <div>
-      <Toolbar />
+      {/* <Toolbar /> */}
+      <div className="sidebar-header">
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          sx={{ mr: 2, display: { sm: 'none' } }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" noWrap component="div">
+          Memory Partner
+        </Typography>
+      </div>
       <Divider />
       <List>
         <ListItem key={'001'} disablePadding>
@@ -57,17 +71,13 @@ export default function SideBar(props: any) {
         </ListItem>
         <Divider />
       {memories.map((memory) => {
-          let parsedDescription = JSON.parse(memory.description);
-          if (!parsedDescription.blocks) {
-            parsedDescription = JSON.parse(parsedDescription);
-          }
           return (
             <ListItem key={memory.id} disablePadding>
             <ListItemButton onClick={() => handleListItemClick(memory.id)}>
               <ListItemIcon>
               <MailIcon />
               </ListItemIcon>
-              <ListItemText primary={parsedDescription.blocks[0].text.substring(0, 20)} />
+              <ListItemText primary={memory.title.substring(0, 20)} />
             </ListItemButton>
           </ListItem>
           );

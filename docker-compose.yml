@@ -25,8 +25,8 @@ services:
 
   server:
     container_name: server
-    # depends_on:
-    #   - memoryPartnerDb
+    depends_on:
+      - memoryPartnerDb
     build: ./server
     restart: unless-stopped
     env_file: ./.env
@@ -48,8 +48,8 @@ services:
     
   client:
     container_name: client
-    # depends_on: 
-      # - server
+    depends_on: 
+      - server
     build:
       context: ./client
       dockerfile: Dockerfile

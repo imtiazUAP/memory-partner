@@ -1,14 +1,3 @@
-.layout-header {
-    background-color: #264653;
-    color: #ffffff;
-    font-size: 30px;
-    text-align: center;
-    padding: 15px;
-    width: 100%;
-    position: sticky;
-    top: 0;
-}
-
 .layout-footer {
     background-color: #264653;
     color: #f4a261;
@@ -22,11 +11,21 @@
     margin: 0;
     padding: 0;
     width: 200px;
-    background-color: #f1f1f1;
     position: fixed;
     height: 90%;
     overflow: auto;
     /* border: 2px solid black; */
+}
+
+.sidebar-header {
+    background-color: #146e92;
+    color: #ffffff;
+    font-size: 30px;
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+    position: sticky;
+    top: 0;
 }
 
 .sidebar a {

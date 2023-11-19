@@ -19,7 +19,7 @@ export class MemoriesService {
         {
           user_id: params.user_id,
           title: params.title,
-          description: JSON.stringify(params.description),
+          description: params.description,
           created_at: currentTime.toString(),
           updated_at: currentTime.toString(),
           updated_by: params.updated_by,
@@ -38,7 +38,7 @@ export class MemoriesService {
 
   async updateMemoryById(memoryId: number, descriptionText: any): Promise<any> {
     const memory = await this.memoryRepository.findOneBy({ id: memoryId });
-    const descriptionJsonString = JSON.stringify(descriptionText);
+    const descriptionJsonString = descriptionText;
     if (descriptionText) {
       memory.description = descriptionJsonString;
     }
