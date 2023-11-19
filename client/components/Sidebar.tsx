@@ -57,17 +57,14 @@ export default function SideBar(props: any) {
         </ListItem>
         <Divider />
       {memories.map((memory) => {
-          let parsedDescription = JSON.parse(memory.description);
-          if (!parsedDescription.blocks) {
-            parsedDescription = JSON.parse(parsedDescription);
-          }
+          let memoryTitle = memory.title;
           return (
             <ListItem key={memory.id} disablePadding>
             <ListItemButton onClick={() => handleListItemClick(memory.id)}>
               <ListItemIcon>
               <MailIcon />
               </ListItemIcon>
-              <ListItemText primary={parsedDescription.blocks[0].text.substring(0, 20)} />
+              <ListItemText primary={memoryTitle.substring(0, 20)} />
             </ListItemButton>
           </ListItem>
           );
