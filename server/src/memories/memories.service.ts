@@ -36,11 +36,13 @@ export class MemoriesService {
     return await this.memoryRepository.findOneBy({ id: memoryId });
   }
 
-  async updateMemoryById(memoryId: number, descriptionText: any): Promise<any> {
+  async updateMemoryById(memoryId: number, title: string, descriptionText: any): Promise<any> {
     const memory = await this.memoryRepository.findOneBy({ id: memoryId });
-    const descriptionJsonString = descriptionText;
+    if (title) {
+      memory.title = title;
+    }
     if (descriptionText) {
-      memory.description = descriptionJsonString;
+      memory.description = descriptionText;
     }
     return await this.memoryRepository.save(memory);
   }

@@ -3,6 +3,8 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Button from '@mui/material/Button';
 import SaveIcon from '@mui/icons-material/Save';
 import React, { useState } from 'react';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 interface MyEditorProps {
   id?: number;
@@ -12,40 +14,75 @@ interface MyEditorProps {
 
 const CkEditor: React.FC<MyEditorProps> = ({ id, value, onChange }) => {
   const [memoryDescription, setMemoryDescription] = useState('');
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
   const handleReady = (editor: any) => {
     editor.editing.view.change((writer: any) => {
       writer.setStyle('height', `${window.innerHeight - 45}px`, editor.editing.view.document.getRoot());
     });
   };
 
-  // Inserting or updating]
-  const handleSave = (newValue: any) => {
-      if (id) {
-        // updating
-        fetch(`http://localhost:3001/memories/${id}`, {
-          method: 'PUT',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ id: id, description: memoryDescription }),
-        });
-      } else {
-        // inserting
-        fetch(`http://localhost:3001/memories/add`, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user_id: 1,
-          title: 'This is title',
-          description: newValue,
-          updated_by: 1,
-        }),
-      });
+  const handleAlertMessage = (isSuccess: boolean) => {
+    if (isSuccess) {
+      setShowSuccessMessage(true);
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 4000);
+    } else {
+      setShowErrorMessage(true);
+      setTimeout(() => {
+        setShowErrorMessage(false);
+      }, 4000);
     }
+  }
+
+  const cleanHtml = (htmlString: string) => {
+    var doc = new DOMParser().parseFromString(htmlString, 'text/html');
+    return doc.body.textContent || "";
+  }
+
+  // Inserting or updating]
+  const handleSave = () => {
+    if(!memoryDescription.length) {
+      handleAlertMessage(false);
+      return;
+    }
+    const cleanedDescription = cleanHtml(memoryDescription);
+    let url, method;
+    if (id) {
+      // updating
+      url = `http://localhost:3001/memories/${id}`;
+      method = 'PUT';
+    } else {
+      // inserting
+      url = 'http://localhost:3001/memories/add';
+      method = 'POST';
+    }
+  
+    fetch(url, {
+      method: method,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: id,
+        user_id: 1,
+        title: cleanedDescription.length ? cleanedDescription.substring(0, 18) : 'Untitled Note',
+        description: memoryDescription,
+        updated_by: 1,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          handleAlertMessage(true);
+        } else {
+          handleAlertMessage(false);
+        }
+      })
+      .catch((error) => {
+        handleAlertMessage(false);
+      });
   };
 
   return (
@@ -60,11 +97,29 @@ const CkEditor: React.FC<MyEditorProps> = ({ id, value, onChange }) => {
           setMemoryDescription(data);
         }}
       />
+      {/* Success message */}
+      {showSuccessMessage && (
+        <div className={`success-message ${showSuccessMessage ? 'show' : ''}`}>
+          <Alert severity="success">
+            <AlertTitle>Success</AlertTitle>
+            Successfully saved the note
+          </Alert>
+        </div>
+      )}
+      {/* Error message */}
+      {showErrorMessage && (
+        <div className={`error-message ${showErrorMessage ? 'show' : ''}`}>
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            Something went wrong — <strong>Please contact support</strong>
+          </Alert>
+        </div>
+      )}
       <div className="save-button">
         <Button
           variant="contained"
           endIcon={<SaveIcon />}
-          onClick={() => handleSave(memoryDescription)}>
+          onClick={() => handleSave()}>
           Save
         </Button>
       </div>
