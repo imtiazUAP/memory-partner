@@ -29,7 +29,11 @@ export class MemoriesService {
   }
 
   async getMemoryList(): Promise<any> {
-    return await this.memoryRepository.find();
+    return await this.memoryRepository.find({
+      order: {
+        updated_at: 'DESC',
+      },
+    });
   }
 
   async getMemoryDetail(memoryId: number): Promise<any> {
@@ -38,12 +42,14 @@ export class MemoriesService {
 
   async updateMemoryById(memoryId: number, title: string, descriptionText: any): Promise<any> {
     const memory = await this.memoryRepository.findOneBy({ id: memoryId });
+    const currentTime = Date();
     if (title) {
       memory.title = title;
     }
     if (descriptionText) {
       memory.description = descriptionText;
     }
+    memory.updated_at = currentTime.toString();
     return await this.memoryRepository.save(memory);
   }
 

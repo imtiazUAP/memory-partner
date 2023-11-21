@@ -41,7 +41,7 @@ const Memory: NextPage = (): JSX.Element => {
           <Editor
               id={memoryId}
               value={memoryDescription}
-              onChange={(newValue) => console.log('value changed: ', newValue)}
+              onChange={(newValue) => {}}
           />
         </div>
     </div>
