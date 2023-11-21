@@ -1,14 +1,3 @@
-.layout-header {
-    background-color: #264653;
-    color: #ffffff;
-    font-size: 30px;
-    text-align: center;
-    padding: 15px;
-    width: 100%;
-    position: sticky;
-    top: 0;
-}
-
 .layout-footer {
     background-color: #264653;
     color: #f4a261;
@@ -17,22 +6,72 @@
     padding: 20px;
 }
 
-/* Sidebar css start */
+/* Mobile header */
+.mobile-header {
+    display: none;
+    /* Initially hide the header */
+    align-items: center;
+    justify-content: space-between;
+    background-color: #384FB7;
+    color: #ffffff;
+    font-size: 15px;
+    text-align: center;
+    padding: 4px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+}
+
+.mobile-header button {
+    margin-left: 16px;
+}
+
+/* only applicable for mobile screen */
+@media only screen and (max-width: 600px) {
+    /* Show the header on small screens */
+    .mobile-header {
+        display: flex;
+    }
+
+    .large-sidebar-header {
+        display: none;
+    }
+}
+
+
+/* Sidebar css -start */
 .sidebar {
     margin: 0;
     padding: 0;
-    width: 200px;
-    background-color: #f1f1f1;
     position: fixed;
-    height: 90%;
-    overflow: auto;
-    /* border: 2px solid black; */
+}
+
+.sidebar-open {
+    transform: translateX(0);
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.sidebar-closed {
+    transform: translateX(-100%);
+}
+
+.sidebar-header {
+    background-color: #384FB7;
+    color: #ffffff;
+    font-size: 15px;
+    text-align: center;
+    padding: 4px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 3;
 }
 
 .sidebar a {
     display: block;
     color: black;
-    padding: 16px;
     text-decoration: none;
 }
 
@@ -41,9 +80,33 @@
     color: white;
 }
 
-.content {
-    margin-left: 240px;
-    padding: 1px 16px;
+.sidebar-drawer {
+    display: flex;
+    height: 100%;
 }
 
-/* Sidebar css end */
+.icons-tray {
+    background-color: #63B668;
+    max-width: 50px;
+    overflow-y: hidden;
+    margin-left: -5px;
+}
+
+.sidebar-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+/* only applicable for larger screen */
+@media screen and (min-width: 601px) {
+    .content {
+        margin-left: 300px;
+        padding: 1px 16px;
+    }
+
+    .mobile-sidebar-header {
+        display: none;
+    }
+}

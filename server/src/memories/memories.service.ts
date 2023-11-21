@@ -19,7 +19,7 @@ export class MemoriesService {
         {
           user_id: params.user_id,
           title: params.title,
-          description: JSON.stringify(params.description),
+          description: params.description,
           created_at: currentTime.toString(),
           updated_at: currentTime.toString(),
           updated_by: params.updated_by,
@@ -29,19 +29,27 @@ export class MemoriesService {
   }
 
   async getMemoryList(): Promise<any> {
-    return await this.memoryRepository.find();
+    return await this.memoryRepository.find({
+      order: {
+        updated_at: 'DESC',
+      },
+    });
   }
 
   async getMemoryDetail(memoryId: number): Promise<any> {
     return await this.memoryRepository.findOneBy({ id: memoryId });
   }
 
-  async updateMemoryById(memoryId: number, descriptionText: any): Promise<any> {
+  async updateMemoryById(memoryId: number, title: string, descriptionText: any): Promise<any> {
     const memory = await this.memoryRepository.findOneBy({ id: memoryId });
-    const descriptionJsonString = JSON.stringify(descriptionText);
-    if (descriptionText) {
-      memory.description = descriptionJsonString;
+    const currentTime = Date();
+    if (title) {
+      memory.title = title;
     }
+    if (descriptionText) {
+      memory.description = descriptionText;
+    }
+    memory.updated_at = currentTime.toString();
     return await this.memoryRepository.save(memory);
   }
 

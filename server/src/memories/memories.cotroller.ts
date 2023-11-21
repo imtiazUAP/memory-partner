@@ -35,6 +35,7 @@ export class MemoriesController {
   ): any {
     return this.memoriesService.updateMemoryById(
       id,
+      updateUserBodyParams.title,
       updateUserBodyParams.description,
     );
   }
