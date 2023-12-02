@@ -1,56 +1,4 @@
-.layout-footer {
-    background-color: #264653;
-    color: #f4a261;
-    font-size: 30px;
-    text-align: center;
-    padding: 20px;
-}
-
-/* Mobile header */
-.mobile-header {
-    display: none;
-    /* Initially hide the header */
-    align-items: center;
-    justify-content: center;
-    background-color: #384FB7;
-    color: #ffffff;
-    font-size: 15px;
-    text-align: center;
-    padding: 4px;
-    width: 100%;
-    position: sticky;
-    top: 0;
-    z-index: 3;
-}
-
-.mobile-header button {
-    margin-left: 16px;
-}
-
-/* only applicable for mobile screen */
-@media only screen and (max-width: 600px) {
-    /* Show the header on small screens */
-    .mobile-header {
-        display: flex;
-    }
-
-    .large-sidebar-header {
-        display: none;
-    }
-
-    .fullscreen-header {
-        display: none;
-    }
-}
-
-
 /* Sidebar css -start */
-.sidebar {
-    margin: 0;
-    padding: 0;
-    position: fixed;
-}
-
 .sidebar-open {
     transform: translateX(0);
     height: 100%;
@@ -59,6 +7,12 @@
 
 .sidebar-closed {
     transform: translateX(-100%);
+}
+
+.sidebar {
+    margin: 0;
+    padding: 0;
+    position: fixed;
 }
 
 .sidebar-header {
@@ -89,7 +43,7 @@
     height: 100%;
 }
 
-.icons-tray {
+.sidebar-icons-tray {
     background-color: #63B668;
     max-width: 50px;
     overflow-y: hidden;
@@ -103,10 +57,60 @@
     z-index: 1;
 }
 
+/* only applicable for mobile screen */
+@media only screen and (max-width: 600px) {
+    /* Show the header on small screens */
+    /* Mobile header */
+    .mobile-header {
+        display: flex;
+        /* Initially hide the header */
+        align-items: center;
+        justify-content: center;
+        background-color: #384FB7;
+        color: #ffffff;
+        font-size: 15px;
+        text-align: center;
+        padding: 4px;
+        width: 100%;
+        position: sticky;
+        top: 0;
+        z-index: 3;
+    }
+
+    .mobile-header button {
+        margin-left: 16px;
+    }
+
+    .large-sidebar-header {
+        display: none;
+    }
+
+    .fullscreen-header {
+        display: none;
+    }
+}
+
 /* only applicable for larger screen */
 @media screen and (min-width: 601px) {
+    .app-container {
+        display: flex;
+    }
+    
+    .sidebar-flex {
+        flex-grow: 1;
+        flex-basis: 20%; /* 1/4th of the container */
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .content-flex {
+        flex-grow: 4; /* 3/4th of the container */
+        flex-basis: 80%;
+        display: flex;
+        flex-direction: column;
+    }
+
     .content {
-        margin-left: 300px;
         padding: 1px 16px;
     }
 
@@ -115,7 +119,6 @@
     }
 
     .fullscreen-header {
-        margin-left: 300px;
         background-color: #384FB7;
         color: #ffffff;
         font-size: 15px;

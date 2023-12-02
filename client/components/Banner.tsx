@@ -1,19 +1,17 @@
 import React from "react";
 import styles from "../styles/Home.module.css";
-import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 
 const Banner = () => {
   return (
     <>
-      <Typography variant="h2" noWrap component="div">
-        More than a Friend!
-      </Typography>
-      <Typography variant="h2" noWrap component="div">
-        I can remember anything you want me to remember!
-      </Typography>
-      <p className={styles.description}>
-        
-      </p>
+      <div className={styles.title}>Beyond a Friend, Your Virtual Partner!</div>
+      <Divider />
+      <div className={styles.description}>
+        I remember for you, remind you on time, and guard your secrets. Elevate
+        your daily experience with a trustworthy companion – more than an
+        assistant, your confidant.
+      </div>
     </>
   );
 };
