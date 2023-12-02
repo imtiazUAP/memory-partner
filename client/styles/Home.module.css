@@ -10,7 +10,7 @@
   padding: 60px 60px 50px 60px;
   /* top, right, bottom, left */
   width: 100%;
-  background-color: #F7F9F2;
+  background-color: #141A1F;
 }
 
 .title {
@@ -18,7 +18,7 @@
   font-family: 'Quicksand', sans-serif;
   font-size: 2.5rem;
   font-weight: bold;
-  color: #333;
+  color: #F44336;
   text-align: left;
 }
 
@@ -26,7 +26,7 @@
   padding-top: 20px;
   font-family: 'Quicksand', serif;
   font-size: 1.8rem;
-  color: #666;
+  color: #A08145;
   text-align: left;
 }
 
@@ -61,20 +61,20 @@
 .card h2 {
   margin: 0 0 1rem 0;
   font-size: 1.2rem;
-  color: #384FB7;
+  color: #288CEF;
 }
 
 .card p {
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
-  color: rgb(51,51,51);
+  color: whitesmoke;
 }
 
 .icon {
   /* Set the icon size */
   font-size: 4rem; /* Adjust the size as needed */
-  color: #384FB7;
+  color: #288CEF;
 }
 
 .footer {
@@ -84,6 +84,7 @@
   border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
+  color: white;
 }
 
 .footer a {

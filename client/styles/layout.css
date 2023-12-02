@@ -16,7 +16,7 @@
 }
 
 .sidebar-header {
-    background-color: #384FB7;
+    background-color: #11161A;
     color: #ffffff;
     font-size: 15px;
     text-align: center;
@@ -44,7 +44,7 @@
 }
 
 .sidebar-icons-tray {
-    background-color: #63B668;
+    background-color: #0E2338;
     max-width: 50px;
     overflow-y: hidden;
     margin-left: -5px;
@@ -55,6 +55,8 @@
     overflow-y: auto;
     box-sizing: border-box;
     z-index: 1;
+    background-color: #141A1F;
+    color: white;
 }
 
 /* only applicable for mobile screen */
@@ -108,6 +110,7 @@
         flex-basis: 80%;
         display: flex;
         flex-direction: column;
+        background-color: #141A1F;
     }
 
     .content {
@@ -119,11 +122,16 @@
     }
 
     .fullscreen-header {
-        background-color: #384FB7;
+        background-color: #11161A;
         color: #ffffff;
         font-size: 15px;
         text-align: center;
         padding: 4px;
         width: 100%;
+    }
+
+    .sidebar-content-icon,
+    .icon-tray-icon {
+        color: #288CEF;
     }
 }

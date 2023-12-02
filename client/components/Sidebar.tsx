@@ -136,7 +136,7 @@ export default function SideBar(props: any) {
                 <ListItem disablePadding key={icon.action}>
                   <ListItemButton onClick={() => handleIconClick(icon.action)}>
                     <Tooltip title={icon.toolTip} arrow>
-                      <ListItemIcon>
+                      <ListItemIcon className="icon-tray-icon">
                         {getIconComponent(icon.iconName)}
                       </ListItemIcon>
                     </Tooltip>
@@ -161,7 +161,7 @@ export default function SideBar(props: any) {
                       router.push("/new_memory");
                     }}
                   >
-                    <ListItemIcon>
+                    <ListItemIcon className="sidebar-content-icon">
                       <NoteAddIcon />
                     </ListItemIcon>
                     <ListItemText primary={"Add new memory"} />
@@ -174,7 +174,7 @@ export default function SideBar(props: any) {
                       router.push("/new_memory");
                     }}
                   >
-                    <ListItemIcon>
+                    <ListItemIcon className="sidebar-content-icon">
                       <EditCalendarIcon />
                     </ListItemIcon>
                     <ListItemText primary={"Add new event"} />
@@ -187,7 +187,7 @@ export default function SideBar(props: any) {
                       router.push("/new_memory");
                     }}
                   >
-                    <ListItemIcon>
+                    <ListItemIcon className="sidebar-content-icon">
                       <EnhancedEncryptionIcon />
                     </ListItemIcon>
                     <ListItemText primary={"Add new credential"} />
@@ -205,7 +205,7 @@ export default function SideBar(props: any) {
                         router.push(`/memory?id=${memory.id}`);
                       }}
                     >
-                      <ListItemIcon style={{ marginRight: "-12px" }}>
+                      <ListItemIcon style={{ marginRight: "-12px" }} className="sidebar-content-icon">
                         <EditNoteIcon />
                       </ListItemIcon>
                       <div
