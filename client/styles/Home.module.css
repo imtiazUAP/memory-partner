@@ -3,12 +3,12 @@
 }
 
 .main {
-  padding: 4rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  /* margin-left: 300px; */
 }
 
 .footer {
@@ -48,7 +48,7 @@
 
 .title,
 .description {
-  text-align: center;
+  text-align: left;
 }
 
 .description {

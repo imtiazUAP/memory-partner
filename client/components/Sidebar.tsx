@@ -25,6 +25,8 @@ import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import Tooltip from "@mui/material/Tooltip";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
+import HomeIcon from '@mui/icons-material/Home';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
 export default function SideBar(props: any) {
   const dispatch = useDispatch();
@@ -55,25 +57,28 @@ export default function SideBar(props: any) {
   }, [contextMemories]);
 
   const icons = [
-    { iconName: "AddIcon", action: "addMemory", toolTip: "Add new", key: 1 },
+    { iconName: "HomeIcon", action: "HomeIcon", toolTip: "Home", key: 1 },
+    { iconName: "AddIcon", action: "addMemory", toolTip: "Add new", key: 2 },
     {
       iconName: "EditNoteIcon",
       action: "viewMemories",
       toolTip: "Show memories",
-      key: 2,
+      key: 3,
     },
-    { iconName: "LoginIcon", action: "showLogin", toolTip: "Logout", key: 3 },
+    { iconName: "LoginIcon", action: "showLogin", toolTip: "Logout", key: 4 },
     {
       iconName: "AccountBoxIcon",
       action: "showProfile",
       toolTip: "My profile",
-      key: 4,
+      key: 5,
     },
-    { iconName: "ShareIcon", action: "shareMemory", toolTip: "Share", key: 5 },
+    { iconName: "ShareIcon", action: "shareMemory", toolTip: "Share", key: 6 },
   ];
 
   const getIconComponent = (iconName: string) => {
     switch (iconName) {
+      case "HomeIcon":
+        return <HomeIcon />;
       case "AccountBoxIcon":
         return <AccountBoxIcon />;
       case "AddIcon":
@@ -89,13 +94,21 @@ export default function SideBar(props: any) {
     }
   };
 
+
+  const handleListItemClick = () => {
+    if (isMobileScreen) {
+      dispatch({ type: "TOGGLE_SIDEBAR" });
+    }
+  };
+
   const handleIconClick = (icon: string) => {
     console.log("clicked icon: ", icon);
     setSelectedIcon(icon);
-  };
 
-  const handleListItemClick = () => {
-    dispatch({ type: "TOGGLE_SIDEBAR" });
+    if( icon === 'HomeIcon') {
+      router.push("/");
+      handleListItemClick();
+    }
   };
 
   const drawer = (
@@ -113,7 +126,7 @@ export default function SideBar(props: any) {
         </div>
         <div className="large-sidebar-header">
           <Typography variant="h6" noWrap component="div">
-            Memory Partner
+            <FormatListBulletedIcon />
           </Typography>
         </div>
       </div>
@@ -148,9 +161,7 @@ export default function SideBar(props: any) {
                 <ListItem key={"001"} disablePadding>
                   <ListItemButton
                     onClick={() => {
-                      if (isMobileScreen) {
                         handleListItemClick();
-                      }
                       router.push("/new_memory");
                     }}
                   >
@@ -163,9 +174,7 @@ export default function SideBar(props: any) {
                 <ListItem key={"002"} disablePadding>
                   <ListItemButton
                     onClick={() => {
-                      if (isMobileScreen) {
                         handleListItemClick();
-                      }
                       router.push("/new_memory");
                     }}
                   >
@@ -178,9 +187,7 @@ export default function SideBar(props: any) {
                 <ListItem key={"003"} disablePadding>
                   <ListItemButton
                     onClick={() => {
-                      if (isMobileScreen) {
                         handleListItemClick();
-                      }
                       router.push("/new_memory");
                     }}
                   >
@@ -192,15 +199,13 @@ export default function SideBar(props: any) {
                 </ListItem>
               </>
             )}
-            {selectedIcon === "viewMemories" &&
+            {(selectedIcon === "viewMemories" || selectedIcon === "HomeIcon") &&
               contextMemories.map((memory: any) => (
                 <div>
                   <ListItem key={memory.id} disablePadding>
                     <ListItemButton
                       onClick={() => {
-                        if (isMobileScreen) {
                           handleListItemClick();
-                        }
                         router.push(`/memory?id=${memory.id}`);
                       }}
                     >

@@ -11,7 +11,7 @@
     display: none;
     /* Initially hide the header */
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     background-color: #384FB7;
     color: #ffffff;
     font-size: 15px;
@@ -35,6 +35,10 @@
     }
 
     .large-sidebar-header {
+        display: none;
+    }
+
+    .fullscreen-header {
         display: none;
     }
 }
@@ -108,5 +112,15 @@
 
     .mobile-sidebar-header {
         display: none;
+    }
+
+    .fullscreen-header {
+        margin-left: 300px;
+        background-color: #384FB7;
+        color: #ffffff;
+        font-size: 15px;
+        text-align: center;
+        padding: 4px;
+        width: 100%;
     }
 }
