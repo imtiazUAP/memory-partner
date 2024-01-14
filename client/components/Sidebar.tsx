@@ -7,11 +7,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
-import Toolbar from "@mui/material/Toolbar";
 import { useRouter } from "next/router";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import LoginIcon from "@mui/icons-material/Login";
@@ -25,6 +22,10 @@ import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import Tooltip from "@mui/material/Tooltip";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
+import HomeIcon from "@mui/icons-material/Home";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import MyProfile from "./MyProfile";
+import Login from "./Login";
 
 export default function SideBar(props: any) {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ export default function SideBar(props: any) {
           method: "GET",
         }).then(async (response: any) => {
           const memories = await response.json();
-          dispatch({type: 'UPDATE_MEMORIES', payload: memories })
+          dispatch({ type: "UPDATE_MEMORIES", payload: memories });
         });
       } catch (error) {
         console.log(error);
@@ -55,25 +56,28 @@ export default function SideBar(props: any) {
   }, [contextMemories]);
 
   const icons = [
-    { iconName: "AddIcon", action: "addMemory", toolTip: "Add new", key: 1 },
+    { iconName: "HomeIcon", action: "HomeIcon", toolTip: "Home", key: 1 },
+    { iconName: "AddIcon", action: "addMemory", toolTip: "Add new", key: 2 },
     {
       iconName: "EditNoteIcon",
       action: "viewMemories",
       toolTip: "Show memories",
-      key: 2,
+      key: 3,
     },
-    { iconName: "LoginIcon", action: "showLogin", toolTip: "Logout", key: 3 },
+    { iconName: "LoginIcon", action: "showLogin", toolTip: "Logout", key: 4 },
     {
       iconName: "AccountBoxIcon",
       action: "showProfile",
       toolTip: "My profile",
-      key: 4,
+      key: 5,
     },
-    { iconName: "ShareIcon", action: "shareMemory", toolTip: "Share", key: 5 },
+    { iconName: "ShareIcon", action: "shareMemory", toolTip: "Share", key: 6 },
   ];
 
   const getIconComponent = (iconName: string) => {
     switch (iconName) {
+      case "HomeIcon":
+        return <HomeIcon />;
       case "AccountBoxIcon":
         return <AccountBoxIcon />;
       case "AddIcon":
@@ -89,13 +93,20 @@ export default function SideBar(props: any) {
     }
   };
 
+  const handleListItemClick = () => {
+    if (isMobileScreen) {
+      dispatch({ type: "TOGGLE_SIDEBAR" });
+    }
+  };
+
   const handleIconClick = (icon: string) => {
     console.log("clicked icon: ", icon);
     setSelectedIcon(icon);
-  };
 
-  const handleListItemClick = () => {
-    dispatch({ type: "TOGGLE_SIDEBAR" });
+    if (icon === "HomeIcon") {
+      router.push("/");
+      handleListItemClick();
+    }
   };
 
   const drawer = (
@@ -113,14 +124,14 @@ export default function SideBar(props: any) {
         </div>
         <div className="large-sidebar-header">
           <Typography variant="h6" noWrap component="div">
-            Memory Partner
+            <FormatListBulletedIcon />
           </Typography>
         </div>
       </div>
       {/* <Sidebar header -end /> */}
       {/* Vertical Menu Bar -start */}
       <div className="sidebar-drawer">
-        <div className="icons-tray">
+        <div className="sidebar-icons-tray">
           <List>
             {icons.map((icon) => (
               <>
@@ -148,9 +159,7 @@ export default function SideBar(props: any) {
                 <ListItem key={"001"} disablePadding>
                   <ListItemButton
                     onClick={() => {
-                      if (isMobileScreen) {
-                        handleListItemClick();
-                      }
+                      handleListItemClick();
                       router.push("/new_memory");
                     }}
                   >
@@ -163,9 +172,7 @@ export default function SideBar(props: any) {
                 <ListItem key={"002"} disablePadding>
                   <ListItemButton
                     onClick={() => {
-                      if (isMobileScreen) {
-                        handleListItemClick();
-                      }
+                      handleListItemClick();
                       router.push("/new_memory");
                     }}
                   >
@@ -178,9 +185,7 @@ export default function SideBar(props: any) {
                 <ListItem key={"003"} disablePadding>
                   <ListItemButton
                     onClick={() => {
-                      if (isMobileScreen) {
-                        handleListItemClick();
-                      }
+                      handleListItemClick();
                       router.push("/new_memory");
                     }}
                   >
@@ -192,15 +197,13 @@ export default function SideBar(props: any) {
                 </ListItem>
               </>
             )}
-            {selectedIcon === "viewMemories" &&
+            {(selectedIcon === "viewMemories" || selectedIcon === "HomeIcon") &&
               contextMemories.map((memory: any) => (
                 <div>
                   <ListItem key={memory.id} disablePadding>
                     <ListItemButton
                       onClick={() => {
-                        if (isMobileScreen) {
-                          handleListItemClick();
-                        }
+                        handleListItemClick();
                         router.push(`/memory?id=${memory.id}`);
                       }}
                     >
@@ -219,13 +222,15 @@ export default function SideBar(props: any) {
                   <Divider />
                 </div>
               ))}
+            {selectedIcon === "showProfile" && <MyProfile />}
+            {selectedIcon === "showLogin" && <Login />}
           </List>
         </div>
       </div>
     </div>
   );
 
-  const drawerWidth = 300;
+  const drawerWidth = isMobileScreen ? "80%" : "20%";
   return (
     <Box
       component="nav"
