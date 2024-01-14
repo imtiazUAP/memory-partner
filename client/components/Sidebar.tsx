@@ -24,6 +24,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import HomeIcon from "@mui/icons-material/Home";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import MyProfile from "./MyProfile";
+import Login from "./Login";
 
 export default function SideBar(props: any) {
   const dispatch = useDispatch();
@@ -220,6 +222,8 @@ export default function SideBar(props: any) {
                   <Divider />
                 </div>
               ))}
+            {selectedIcon === "showProfile" && <MyProfile />}
+            {selectedIcon === "showLogin" && <Login />}
           </List>
         </div>
       </div>
