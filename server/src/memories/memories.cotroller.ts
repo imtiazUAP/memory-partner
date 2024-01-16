@@ -6,8 +6,10 @@ import {
   Post,
   Put,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { MemoriesService } from './memories.service';
+import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 
 @Controller('/memories')
 export class MemoriesController {
@@ -18,6 +20,7 @@ export class MemoriesController {
     return this.memoriesService.addMemory(addMemoryBodyParams);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('/list')
   getMemoryList(): any {
     return this.memoriesService.getMemoryList();

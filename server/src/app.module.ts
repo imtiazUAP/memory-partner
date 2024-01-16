@@ -5,6 +5,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MemoriesModule } from './memories/memories.module';
 import { Memories } from '../entities/memories.entity';
+import { AuthModule } from './auth/auth.module';
+import { AuthService } from './auth/auth.service';
+import { UsersModule } from './users/users.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { JwtService } from '@nestjs/jwt';
+import { Users } from '../entities/users.entity';
 
 @Module({
   imports: [
@@ -20,13 +27,18 @@ import { Memories } from '../entities/memories.entity';
         username: configService.get('DB_USER'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: [Memories],
+        entities: [Memories, Users],
         synchronize: false,
       }),
     }),
-    MemoriesModule
+    MemoriesModule,
+    AuthModule,
+    UsersModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AuthService, JwtService, {
+    provide: APP_INTERCEPTOR,
+    useClass: AuthInterceptor,
+  }],
 })
 export class AppModule {}
