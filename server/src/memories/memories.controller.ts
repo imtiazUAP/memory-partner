@@ -20,7 +20,7 @@ export class MemoriesController {
     return this.memoriesService.addMemory(addMemoryBodyParams);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get('/list')
   getMemoryList(): any {
     return this.memoriesService.getMemoryList();

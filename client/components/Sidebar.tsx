@@ -35,16 +35,26 @@ export default function SideBar(props: any) {
   const contextMemories = useSelector(
     (state: RootState) => state.context.memories
   );
+  const accessToken = useSelector(
+    (state: RootState) => state.context
+  );
   const isMobileScreen =
     typeof window !== "undefined" && window.innerWidth < 601;
   const router = useRouter();
   const [selectedIcon, setSelectedIcon] = useState("viewMemories");
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo3LCJuYW1lIjoibGl0b24ifSwiaWF0IjoxNzA1NDg1OTUzLCJleHAiOjE3MDU1NzIzNTN9.Msw1EX5zkDC3p5lBTJ5aWwA1vY7_YNhOJbTQclPjiRY';
 
   useEffect(() => {
+    console.log('--- access_token in sidebar: ', accessToken);
     if (!contextMemories.length) {
+      console.log('making request to memories/list');
       try {
         fetch("http://localhost:3001/memories/list", {
           method: "GET",
+          // headers: {
+          //   Authorization: `Bearer ${accessToken}`,
+          //   "Content-Type": "application/json",
+          // },
         }).then(async (response: any) => {
           const memories = await response.json();
           dispatch({ type: "UPDATE_MEMORIES", payload: memories });
@@ -134,7 +144,7 @@ export default function SideBar(props: any) {
         <div className="sidebar-icons-tray">
           <List>
             {icons.map((icon) => (
-              <>
+              <div key={icon.key}>
                 <ListItem disablePadding key={icon.action}>
                   <ListItemButton onClick={() => handleIconClick(icon.action)}>
                     <Tooltip title={icon.toolTip} arrow>
@@ -145,7 +155,7 @@ export default function SideBar(props: any) {
                   </ListItemButton>
                 </ListItem>
                 <Divider />
-              </>
+              </div>
             ))}
           </List>
         </div>
@@ -197,9 +207,9 @@ export default function SideBar(props: any) {
                 </ListItem>
               </>
             )}
-            {(selectedIcon === "viewMemories" || selectedIcon === "HomeIcon") &&
+            {(contextMemories && (selectedIcon === "viewMemories" || selectedIcon === "HomeIcon")) &&
               contextMemories.map((memory: any) => (
-                <div>
+                <div key={memory.id}>
                   <ListItem key={memory.id} disablePadding>
                     <ListItemButton
                       onClick={() => {

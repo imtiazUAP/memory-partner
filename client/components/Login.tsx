@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -8,14 +8,42 @@ import {
   Link as MuiLink,
   Grid,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
 
 // interface LoginProps {
 //   onLogin: (username: string, password: string) => void;
 // }
 
 const Login = () => {
-  const handleSubmit = (event: React.FormEvent) => {
+  const dispatch = useDispatch();
+  const context = useSelector(
+    (state: RootState) => state.context
+  );
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleSubmit = async (event: React.FormEvent) => {
+    console.log('----- clicked sign in---');
     event.preventDefault();
+    try {
+      await fetch("http://localhost:3001/auth/login", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          // Add authorization header if required
+          // 'Authorization': `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({email, password}),
+      }).then(async (response: any) => {
+        // const resp = await response.json();
+        // console.log('----- login response: ', resp);
+        const jsonResponse = await response.json();
+        dispatch({ type: "UPDATE_ACCESS_TOKEN", payload: jsonResponse.access_token });
+        console.log('---- updated redux store: ', context);
+      });
+    } catch (error) {
+      console.log(error);
+    }
     // You can perform validation and then call onLogin with username and password
   };
 
@@ -42,6 +70,10 @@ const Login = () => {
             name="username"
             autoComplete="username"
             autoFocus
+            value={email}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setEmail(event.target.value);
+            }}
           />
           <TextField
             margin="normal"
@@ -52,6 +84,10 @@ const Login = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setPassword(event.target.value);
+            }}
           />
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
             Sign In
