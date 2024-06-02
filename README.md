@@ -1,6 +1,11 @@
 # Memory Partner
 
-Memory Partner is a Dockerized environment with a database, backend, and frontend application. It is designed to manage memories with a comprehensive and user-friendly interface.
+Memory Partner is designed to manage memories with a comprehensive and user-friendly interface. It is developed using a dockerized environment with a database, backend, and frontend application.
+
+## Features
+- Writing personal notes
+- Sharing personal notes
+- Many other features are in-progress
 
 ## Project Structure
 
