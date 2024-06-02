@@ -1,0 +1,87 @@
+- .env
+- .gitignore
+- .idea
+  - code_structure.txt
+  - CountrySelector.tsx
+  - Footer.tsx
+  - SidebarResponsive.tsx
+- client
+  - .eslintrc.json
+  - components
+    - Banner.tsx
+    - CkEditor.tsx
+    - FullScreenHeader.tsx
+    - Login.tsx
+    - MobileHeader.tsx
+    - MyProfile.tsx
+    - Sidebar.tsx
+  - Dockerfile
+  - next-env.d.ts
+  - next.config.js
+  - package-lock.json
+  - package.json
+  - pages
+    - about.tsx
+    - api
+      - hello.ts
+    - index.tsx
+    - memory.tsx
+    - new_memory.tsx
+    - _app.tsx
+    - _document.tsx
+  - public
+    - favicon.ico
+    - next.svg
+    - thirteen.svg
+    - vercel.svg
+  - README.md
+  - store.tsx
+  - styles
+    - editor.css
+    - globals.css
+    - Home.module.css
+    - layout.css
+  - tsconfig.json
+- docker-compose.yml
+- memoryPartnerDb
+  - 00-create_db.sql
+  - 01-create-table-users.sql
+  - 02-populate-users-table.sql
+- package-lock.json
+- package.json
+- README.md
+- server
+  - .eslintrc.js
+  - .prettierrc
+  - dist
+    - main.js
+  - Dockerfile
+  - entities
+    - memories.entity.ts
+    - users.entity.ts
+  - migrations
+    - 1680608251780-Create_Memories.ts
+  - nest-cli.json
+  - ormConfig.ts
+  - package-lock.json
+  - package.json
+  - README.md
+  - src
+    - app.controller.spec.ts
+    - app.controller.ts
+    - app.module.ts
+    - app.service.ts
+    - components
+    - main.ts
+    - memories
+      - dto
+        - memories.dto.ts
+      - memories.cotroller.ts
+      - memories.module.ts
+      - memories.service.ts
+  - test
+    - app.e2e-spec.ts
+    - jest-e2e.json
+  - tsconfig.build.json
+  - tsconfig.json
+  - webpack-hmr.config.js
